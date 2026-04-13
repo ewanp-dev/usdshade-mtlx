@@ -1,0 +1,13 @@
+cache/
+__pycache__/
+build/
+dist/
+wheels/
+.venv/
+.cache/
+
+*.usd
+*.usda
+*.py
+
+.git
