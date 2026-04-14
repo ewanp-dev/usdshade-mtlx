@@ -8,6 +8,4 @@ wheels/
 
 *.usd
 *.usda
-*.py
-
 .git
