@@ -1,14 +1,14 @@
 import os
 import sys
+from pathlib import Path
 from typing import Any, List
 
 from pxr import Sdf, Usd
 
-sys.path.append(os.path.abspath(".."))
-
-from input import SdfShaderInput
+sys.path.append(str(Path(__file__).parent.parent)) # REALLY hacky, will fix after mvp
 
 from database.database import MtlxItem
+from sdf.input import SdfShaderInput
 from utils import ConvertStringToSdfPath, TimeExecution
 
 
@@ -37,8 +37,7 @@ class SdfMtlxShaderSpec:
     def GetPrimSpec(self) -> Sdf.PrimSpec:
         return self.shaderPrimSpec
 
-    def CreateAttribute(self, name, value = None, customData = None) -> None:
-        # TODO: Return input
+    def CreateAttribute(self, name, value = None, customData = None) -> SdfShaderInput:
         valueType = self.database.GetInputType(name)
         inputName = name if name.startswith("inputs:") else f"inputs:{name}"
 
@@ -57,13 +56,13 @@ if __name__ == "__main__":
     @TimeExecution
     def main():
 
-        layer: Sdf.Layer = Sdf.Layer.CreateNew("shader_test_v001.usd")
+        layer: Sdf.Layer = Sdf.Layer.CreateNew("shader_test_v001.usda")
             
         rootPrimSpec: Sdf.PrimSpec = Sdf.PrimSpec(layer, "root", Sdf.SpecifierDef, "Scope")
         materialPrimSpec: Sdf.PrimSpec = Sdf.PrimSpec(rootPrimSpec, "mtl", Sdf.SpecifierDef, "Material")
         shaderSpec = SdfMtlxShaderSpec(materialPrimSpec, "ND_standard_surface_surfaceshader_100")
-        shaderSpec.CreateAttribute("base_color", (0, 1, 0))
-
+        print(shaderSpec.database.GetInputType("specular_roughness"))
+        a = shaderSpec.CreateAttribute("base_color", (0, 1, 0))
         layer.Save()
 
     main()

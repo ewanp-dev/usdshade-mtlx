@@ -1,5 +1,6 @@
 import json
 import os
+from pathlib import Path
 from typing import Any, List
 
 from pxr import Sdf
@@ -22,7 +23,7 @@ class MtlxItem:
 
         :param node: The name of the MaterialX node to access.
         """
-        with open(f"{os.path.abspath('..')}/database/database.json") as file:
+        with open(f"{Path(__file__).parent}/database.json") as file:
             self.data = json.load(file)
 
         if node not in self.data.keys():
@@ -109,7 +110,7 @@ def GetMaterialXNodes() -> List[str]:
 
     :return: Returns a list of strings containing the names of each possible MaterialX node.
     """
-    with open(f"{os.path.abspath('..')}/database/database.json") as file:
+    with open(f"{Path(__file__).parent}/database.json") as file:
         data: dict = json.load(file)
 
     return list(data.keys())
