@@ -5,10 +5,10 @@ from pxr import Sdf
 
 sys.path.append(os.path.abspath(".."))
 
-from BaseUtils import ConvertStringToSdfPath
+from utils import ConvertStringToSdfPath
 
 
-class SdfMtlXSpec:
+class SdfMtlxSpec:
 
     def __init__(self, parentPrim, materialName):
         self.__materialName = materialName

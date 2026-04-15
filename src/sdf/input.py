@@ -6,8 +6,8 @@ from pxr import Sdf
 
 sys.path.append(os.path.abspath(".."))
 
-from BaseUtils import ConvertStringToSdfPath, TimeExecution
-from database.database import MaterialXItem
+from database.database import MtlxItem
+from utils import ConvertStringToSdfPath, TimeExecution
 
 
 class SdfShaderInput:

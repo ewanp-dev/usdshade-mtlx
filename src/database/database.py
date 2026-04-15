@@ -10,7 +10,7 @@ TODO:
     - Improve functionality
 """
 
-class MaterialXItem:
+class MtlxItem:
     """
     A container for a MaterialX item, contains the necessary information
     to create MaterialX shaders
@@ -115,4 +115,4 @@ def GetMaterialXNodes() -> List[str]:
     return list(data.keys())
 
 if __name__ == "__main__":
-    surfaceShaderItem = MaterialXItem("ND_standard_surface_surfaceshader_100")
+    surfaceShaderItem = MtlxItem("ND_standard_surface_surfaceshader_100")

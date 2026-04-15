@@ -2,14 +2,13 @@ import os
 import sys
 from typing import List
 
+from material import SdfMtlxSpec
 from pxr import Sdf
-
-from Material import SdfMtlXSpec
-from Shader import SdfMtlXShaderSpec
+from shader import SdfMtlxShaderSpec
 
 sys.path.append(os.path.abspath(".."))
-from BaseUtils import ConvertStringToSdfPath, TimeExecution
-from database.database import MaterialXItem
+from database.database import MtlxItem
+from utils import ConvertStringToSdfPath, TimeExecution
 
 
 class SdfMtlx:
@@ -18,12 +17,12 @@ class SdfMtlx:
     def __init__(self) -> None:
         pass
 
-    def CreateMaterialSpec(parentPrim, materialName) -> SdfMtlXSpec:
+    def CreateMaterialSpec(parentPrim, materialName) -> SdfMtlxSpec:
         # TODO: Add custom specifier option
-        return SdfMtlXSpec(parentPrim, materialName)
+        return SdfMtlxSpec(parentPrim, materialName)
 
-    def CreateShaderSpec(parentPrim, node, nodeName = None) -> SdfMtlXShaderSpec:
-        return SdfMtlXShaderSpec(parentPrim, node, nodeName)
+    def CreateShaderSpec(parentPrim, node, nodeName = None) -> SdfMtlxShaderSpec:
+        return SdfMtlxShaderSpec(parentPrim, node, nodeName)
 
 
 if __name__ == "__main__":

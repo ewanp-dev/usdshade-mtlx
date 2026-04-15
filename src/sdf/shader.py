@@ -6,18 +6,18 @@ from pxr import Sdf, Usd
 
 sys.path.append(os.path.abspath(".."))
 
-from BaseUtils import ConvertStringToSdfPath, TimeExecution
-from database.database import MaterialXItem
+from input import SdfShaderInput
 
-from Input import SdfShaderInput
+from database.database import MtlxItem
+from utils import ConvertStringToSdfPath, TimeExecution
 
 
-class SdfMtlXShaderSpec:
+class SdfMtlxShaderSpec:
 
     def __init__(self, parentPrim, node, nodeName = None) -> None:
 
         self.parentPrim = parentPrim
-        self.database   = MaterialXItem(node)
+        self.database   = MtlxItem(node)
         self.node       = self.database.node
         self.id         = self.database.node_id
         self.nodeName   = nodeName if nodeName else self.id[3:] # removes the 'ND_'
@@ -61,7 +61,7 @@ if __name__ == "__main__":
             
         rootPrimSpec: Sdf.PrimSpec = Sdf.PrimSpec(layer, "root", Sdf.SpecifierDef, "Scope")
         materialPrimSpec: Sdf.PrimSpec = Sdf.PrimSpec(rootPrimSpec, "mtl", Sdf.SpecifierDef, "Material")
-        shaderSpec = SdfMtlXShaderSpec(materialPrimSpec, "ND_standard_surface_surfaceshader_100")
+        shaderSpec = SdfMtlxShaderSpec(materialPrimSpec, "ND_standard_surface_surfaceshader_100")
         shaderSpec.CreateAttribute("base_color", (0, 1, 0))
 
         layer.Save()
